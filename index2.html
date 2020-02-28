@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Display Webcam Stream</title>
+
+  <style>
+    input[type="button"] {
+      position: absolute;
+    }
+
+    #videoElement {
+      position: absolute;
+      width: 320px;
+      height: 240px;
+      border: 2px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <!-- <video autoplay="true" id="videoElement">
+      <source src="sdv">
+    </video> -->
+    <video autoplay="true" controls id="feeder">
+      <source src="movie.mp4" type="video/mp4">
+      <source src="movie.ogg" type="video/ogg">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <!-- <input type="file" accept="image/*" capture="camera" /> -->
+  <!-- <input type="button" value="sdfs" onclick="ping()"> -->
+  <script>
+
+    // function ping() {
+    //   alert("pinged");
+    // }
+
+    var video = document.querySelector("#feeder");
+
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+    }
+    else {
+      document.write("cam failed")
+    }
+  </script>
+</body>
+
+</html>
